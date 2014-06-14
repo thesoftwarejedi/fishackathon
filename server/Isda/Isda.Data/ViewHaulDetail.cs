@@ -12,19 +12,16 @@ namespace Isda.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class LandingSite
+    public partial class ViewHaulDetail
     {
-        public LandingSite()
-        {
-            this.Hauls = new HashSet<Haul>();
-        }
-    
-        public int LandingSiteId { get; set; }
+        public int GearId { get; set; }
+        public string GearNameEnglish { get; set; }
+        public string GearNameLocal { get; set; }
+        public int HaulGearId { get; set; }
+        public int Expr3 { get; set; }
         public string LandingName { get; set; }
         public string BodyOfWater { get; set; }
-        public Nullable<decimal> Longitude { get; set; }
-        public Nullable<decimal> Latitude { get; set; }
-    
-        public virtual ICollection<Haul> Hauls { get; set; }
+        public decimal Expr4 { get; set; }
+        public decimal Expr5 { get; set; }
     }
 }

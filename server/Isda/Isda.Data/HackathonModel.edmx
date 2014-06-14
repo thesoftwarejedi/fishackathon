@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HackathonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HackathonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Gear">
           <Key>
             <PropertyRef Name="GearId" />
@@ -54,8 +54,8 @@
           <Property Name="LandingSiteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LandingName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="BodyOfWater" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="Longitude" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Latitude" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" />
         </EntityType>
         <EntityType Name="Vessel">
           <Key>
@@ -68,6 +68,30 @@
           <Property Name="BoatLength" Type="decimal" Precision="18" Scale="0" />
           <Property Name="BoatHeight" Type="decimal" Precision="18" Scale="0" />
           <Property Name="BoatWidth" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Hackathon.dbo.ViewHaulDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewHaulDetail">
+          <Key>
+            <PropertyRef Name="GearId" />
+            <PropertyRef Name="GearNameEnglish" />
+            <PropertyRef Name="GearNameLocal" />
+            <PropertyRef Name="HaulGearId" />
+            <PropertyRef Name="Expr3" />
+            <PropertyRef Name="LandingName" />
+            <PropertyRef Name="BodyOfWater" />
+            <PropertyRef Name="Expr4" />
+            <PropertyRef Name="Expr5" />
+          </Key>
+          <Property Name="GearId" Type="int" Nullable="false" />
+          <Property Name="GearNameEnglish" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GearNameLocal" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HaulGearId" Type="int" Nullable="false" />
+          <Property Name="Expr3" Type="int" Nullable="false" />
+          <Property Name="LandingName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="BodyOfWater" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Expr4" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Expr5" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <Association Name="FK_Haul_LandingSite">
           <End Role="LandingSite" Type="Self.LandingSite" Multiplicity="1" />
@@ -83,13 +107,13 @@
         </Association>
         <Association Name="FK_Haul_Vessel">
           <End Role="Vessel" Type="Self.Vessel" Multiplicity="1" />
-          <End Role="Haul" Type="Self.Haul" Multiplicity="0..1" />
+          <End Role="Haul" Type="Self.Haul" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vessel">
               <PropertyRef Name="VesselId" />
             </Principal>
             <Dependent Role="Haul">
-              <PropertyRef Name="HaulId" />
+              <PropertyRef Name="VesselId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -136,6 +160,19 @@
           <EntitySet Name="HaulPhoto" EntityType="Self.HaulPhoto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LandingSite" EntityType="Self.LandingSite" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vessel" EntityType="Self.Vessel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewHaulDetail" EntityType="Self.ViewHaulDetail" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[ViewHaulDetail].[GearId] AS [GearId], 
+[ViewHaulDetail].[GearNameEnglish] AS [GearNameEnglish], 
+[ViewHaulDetail].[GearNameLocal] AS [GearNameLocal], 
+[ViewHaulDetail].[HaulGearId] AS [HaulGearId], 
+[ViewHaulDetail].[Expr3] AS [Expr3], 
+[ViewHaulDetail].[LandingName] AS [LandingName], 
+[ViewHaulDetail].[BodyOfWater] AS [BodyOfWater], 
+[ViewHaulDetail].[Expr4] AS [Expr4], 
+[ViewHaulDetail].[Expr5] AS [Expr5]
+FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Haul_LandingSite" Association="Self.FK_Haul_LandingSite">
             <End Role="LandingSite" EntitySet="LandingSite" />
             <End Role="Haul" EntitySet="Haul" />
@@ -157,19 +194,47 @@
             <End Role="HaulPhoto" EntitySet="HaulPhoto" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Isda.Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HackathonEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Gears" EntityType="Isda.Data.Gear" />
+          <EntitySet Name="Hauls" EntityType="Isda.Data.Haul" />
+          <EntitySet Name="HaulGearXREFs" EntityType="Isda.Data.HaulGearXREF" />
+          <EntitySet Name="HaulPhotoes" EntityType="Isda.Data.HaulPhoto" />
+          <EntitySet Name="LandingSites" EntityType="Isda.Data.LandingSite" />
+          <EntitySet Name="Vessels" EntityType="Isda.Data.Vessel" />
+          <EntitySet Name="ViewHaulDetails" EntityType="Isda.Data.ViewHaulDetail" />
+          <AssociationSet Name="FK_HaulGearXREF_Gear" Association="Isda.Data.FK_HaulGearXREF_Gear">
+            <End Role="Gear" EntitySet="Gears" />
+            <End Role="HaulGearXREF" EntitySet="HaulGearXREFs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Haul_LandingSite" Association="Isda.Data.FK_Haul_LandingSite">
+            <End Role="LandingSite" EntitySet="LandingSites" />
+            <End Role="Haul" EntitySet="Hauls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Haul_Vessel" Association="Isda.Data.FK_Haul_Vessel">
+            <End Role="Vessel" EntitySet="Vessels" />
+            <End Role="Haul" EntitySet="Hauls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HaulGearXREF_Haul" Association="Isda.Data.FK_HaulGearXREF_Haul">
+            <End Role="Haul" EntitySet="Hauls" />
+            <End Role="HaulGearXREF" EntitySet="HaulGearXREFs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HaulPhoto_Haul" Association="Isda.Data.FK_HaulPhoto_Haul">
+            <End Role="Haul" EntitySet="Hauls" />
+            <End Role="HaulPhoto" EntitySet="HaulPhotoes" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Gear">
           <Key>
             <PropertyRef Name="GearId" />
           </Key>
           <Property Name="GearId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GearNameEnglish" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="GearNameLocal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="HaulGearXREFs" Relationship="Self.FK_HaulGearXREF_Gear" FromRole="Gear" ToRole="HaulGearXREF" />
+          <Property Name="GearNameEnglish" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GearNameLocal" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HaulGearXREFs" Relationship="Isda.Data.FK_HaulGearXREF_Gear" FromRole="Gear" ToRole="HaulGearXREF" />
         </EntityType>
         <EntityType Name="Haul">
           <Key>
@@ -185,13 +250,13 @@
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Longitude" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Latitude" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="HaulWeight" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="SampleWeight" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="HaulWeight" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SampleWeight" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="FishType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LandingSite" Relationship="Self.FK_Haul_LandingSite" FromRole="Haul" ToRole="LandingSite" />
-          <NavigationProperty Name="Vessel" Relationship="Self.FK_Haul_Vessel" FromRole="Haul" ToRole="Vessel" />
-          <NavigationProperty Name="HaulGearXREFs" Relationship="Self.FK_HaulGearXREF_Haul" FromRole="Haul" ToRole="HaulGearXREF" />
-          <NavigationProperty Name="HaulPhotoes" Relationship="Self.FK_HaulPhoto_Haul" FromRole="Haul" ToRole="HaulPhoto" />
+          <NavigationProperty Name="LandingSite" Relationship="Isda.Data.FK_Haul_LandingSite" FromRole="Haul" ToRole="LandingSite" />
+          <NavigationProperty Name="Vessel" Relationship="Isda.Data.FK_Haul_Vessel" FromRole="Haul" ToRole="Vessel" />
+          <NavigationProperty Name="HaulGearXREFs" Relationship="Isda.Data.FK_HaulGearXREF_Haul" FromRole="Haul" ToRole="HaulGearXREF" />
+          <NavigationProperty Name="HaulPhotoes" Relationship="Isda.Data.FK_HaulPhoto_Haul" FromRole="Haul" ToRole="HaulPhoto" />
         </EntityType>
         <EntityType Name="HaulGearXREF">
           <Key>
@@ -200,8 +265,8 @@
           <Property Name="HaulGearId" Type="Int32" Nullable="false" />
           <Property Name="HaulId" Type="Int32" Nullable="false" />
           <Property Name="GearId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Gear" Relationship="Self.FK_HaulGearXREF_Gear" FromRole="HaulGearXREF" ToRole="Gear" />
-          <NavigationProperty Name="Haul" Relationship="Self.FK_HaulGearXREF_Haul" FromRole="HaulGearXREF" ToRole="Haul" />
+          <NavigationProperty Name="Gear" Relationship="Isda.Data.FK_HaulGearXREF_Gear" FromRole="HaulGearXREF" ToRole="Gear" />
+          <NavigationProperty Name="Haul" Relationship="Isda.Data.FK_HaulGearXREF_Haul" FromRole="HaulGearXREF" ToRole="Haul" />
         </EntityType>
         <EntityType Name="HaulPhoto">
           <Key>
@@ -209,36 +274,58 @@
           </Key>
           <Property Name="HaulPhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HaulId" Type="Int32" Nullable="false" />
-          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <NavigationProperty Name="Haul" Relationship="Self.FK_HaulPhoto_Haul" FromRole="HaulPhoto" ToRole="Haul" />
+          <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Haul" Relationship="Isda.Data.FK_HaulPhoto_Haul" FromRole="HaulPhoto" ToRole="Haul" />
         </EntityType>
         <EntityType Name="LandingSite">
           <Key>
             <PropertyRef Name="LandingSiteId" />
           </Key>
           <Property Name="LandingSiteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LandingName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BodyOfWater" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Longitude" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Latitude" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="Hauls" Relationship="Self.FK_Haul_LandingSite" FromRole="LandingSite" ToRole="Haul" />
+          <Property Name="LandingName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BodyOfWater" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" />
+          <NavigationProperty Name="Hauls" Relationship="Isda.Data.FK_Haul_LandingSite" FromRole="LandingSite" ToRole="Haul" />
         </EntityType>
         <EntityType Name="Vessel">
           <Key>
             <PropertyRef Name="VesselId" />
           </Key>
           <Property Name="VesselId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VesselType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VesselType" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Engine" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Horsepower" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BoatLength" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="BoatHeight" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="BoatWidth" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Haul" Relationship="Self.FK_Haul_Vessel" FromRole="Vessel" ToRole="Haul" />
+          <NavigationProperty Name="Hauls" Relationship="Isda.Data.FK_Haul_Vessel" FromRole="Vessel" ToRole="Haul" />
+        </EntityType>
+        <EntityType Name="ViewHaulDetail">
+          <Key>
+            <PropertyRef Name="GearId" />
+            <PropertyRef Name="GearNameEnglish" />
+            <PropertyRef Name="GearNameLocal" />
+            <PropertyRef Name="HaulGearId" />
+            <PropertyRef Name="Expr3" />
+            <PropertyRef Name="LandingName" />
+            <PropertyRef Name="BodyOfWater" />
+            <PropertyRef Name="Expr4" />
+            <PropertyRef Name="Expr5" />
+          </Key>
+          <Property Name="GearId" Type="Int32" Nullable="false" />
+          <Property Name="GearNameEnglish" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GearNameLocal" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HaulGearId" Type="Int32" Nullable="false" />
+          <Property Name="Expr3" Type="Int32" Nullable="false" />
+          <Property Name="LandingName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BodyOfWater" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Expr4" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Expr5" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
         <Association Name="FK_HaulGearXREF_Gear">
-          <End Role="Gear" Type="Self.Gear" Multiplicity="1" />
-          <End Role="HaulGearXREF" Type="Self.HaulGearXREF" Multiplicity="*" />
+          <End Type="Isda.Data.Gear" Role="Gear" Multiplicity="1" />
+          <End Type="Isda.Data.HaulGearXREF" Role="HaulGearXREF" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gear">
               <PropertyRef Name="GearId" />
@@ -249,8 +336,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Haul_LandingSite">
-          <End Role="LandingSite" Type="Self.LandingSite" Multiplicity="1" />
-          <End Role="Haul" Type="Self.Haul" Multiplicity="*" />
+          <End Type="Isda.Data.LandingSite" Role="LandingSite" Multiplicity="1" />
+          <End Type="Isda.Data.Haul" Role="Haul" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LandingSite">
               <PropertyRef Name="LandingSiteId" />
@@ -261,20 +348,20 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Haul_Vessel">
-          <End Role="Vessel" Type="Self.Vessel" Multiplicity="1" />
-          <End Role="Haul" Type="Self.Haul" Multiplicity="0..1" />
+          <End Type="Isda.Data.Vessel" Role="Vessel" Multiplicity="1" />
+          <End Type="Isda.Data.Haul" Role="Haul" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vessel">
               <PropertyRef Name="VesselId" />
             </Principal>
             <Dependent Role="Haul">
-              <PropertyRef Name="HaulId" />
+              <PropertyRef Name="VesselId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HaulGearXREF_Haul">
-          <End Role="Haul" Type="Self.Haul" Multiplicity="1" />
-          <End Role="HaulGearXREF" Type="Self.HaulGearXREF" Multiplicity="*" />
+          <End Type="Isda.Data.Haul" Role="Haul" Multiplicity="1" />
+          <End Type="Isda.Data.HaulGearXREF" Role="HaulGearXREF" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Haul">
               <PropertyRef Name="HaulId" />
@@ -285,8 +372,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HaulPhoto_Haul">
-          <End Role="Haul" Type="Self.Haul" Multiplicity="1" />
-          <End Role="HaulPhoto" Type="Self.HaulPhoto" Multiplicity="*" />
+          <End Type="Isda.Data.Haul" Role="Haul" Multiplicity="1" />
+          <End Type="Isda.Data.HaulPhoto" Role="HaulPhoto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Haul">
               <PropertyRef Name="HaulId" />
@@ -296,34 +383,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="HackathonEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Gears" EntityType="Self.Gear" />
-          <EntitySet Name="Hauls" EntityType="Self.Haul" />
-          <EntitySet Name="HaulGearXREFs" EntityType="Self.HaulGearXREF" />
-          <EntitySet Name="HaulPhotoes" EntityType="Self.HaulPhoto" />
-          <EntitySet Name="LandingSites" EntityType="Self.LandingSite" />
-          <EntitySet Name="Vessels" EntityType="Self.Vessel" />
-          <AssociationSet Name="FK_HaulGearXREF_Gear" Association="Self.FK_HaulGearXREF_Gear">
-            <End Role="Gear" EntitySet="Gears" />
-            <End Role="HaulGearXREF" EntitySet="HaulGearXREFs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Haul_LandingSite" Association="Self.FK_Haul_LandingSite">
-            <End Role="LandingSite" EntitySet="LandingSites" />
-            <End Role="Haul" EntitySet="Hauls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Haul_Vessel" Association="Self.FK_Haul_Vessel">
-            <End Role="Vessel" EntitySet="Vessels" />
-            <End Role="Haul" EntitySet="Hauls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HaulGearXREF_Haul" Association="Self.FK_HaulGearXREF_Haul">
-            <End Role="Haul" EntitySet="Hauls" />
-            <End Role="HaulGearXREF" EntitySet="HaulGearXREFs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HaulPhoto_Haul" Association="Self.FK_HaulPhoto_Haul">
-            <End Role="Haul" EntitySet="Hauls" />
-            <End Role="HaulPhoto" EntitySet="HaulPhotoes" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -333,70 +392,85 @@
           <EntitySetMapping Name="Gears">
             <EntityTypeMapping TypeName="Isda.Data.Gear">
               <MappingFragment StoreEntitySet="Gear">
-                <ScalarProperty Name="GearId" ColumnName="GearId" />
-                <ScalarProperty Name="GearNameEnglish" ColumnName="GearNameEnglish" />
                 <ScalarProperty Name="GearNameLocal" ColumnName="GearNameLocal" />
+                <ScalarProperty Name="GearNameEnglish" ColumnName="GearNameEnglish" />
+                <ScalarProperty Name="GearId" ColumnName="GearId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Hauls">
             <EntityTypeMapping TypeName="Isda.Data.Haul">
               <MappingFragment StoreEntitySet="Haul">
-                <ScalarProperty Name="HaulId" ColumnName="HaulId" />
-                <ScalarProperty Name="LandingSiteId" ColumnName="LandingSiteId" />
-                <ScalarProperty Name="VesselId" ColumnName="VesselId" />
-                <ScalarProperty Name="SamplingDateTime" ColumnName="SamplingDateTime" />
-                <ScalarProperty Name="HaulDateTime" ColumnName="HaulDateTime" />
-                <ScalarProperty Name="TrapSetDateTime" ColumnName="TrapSetDateTime" />
-                <ScalarProperty Name="NumberOfFisherman" ColumnName="NumberOfFisherman" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="HaulWeight" ColumnName="HaulWeight" />
-                <ScalarProperty Name="SampleWeight" ColumnName="SampleWeight" />
                 <ScalarProperty Name="FishType" ColumnName="FishType" />
+                <ScalarProperty Name="SampleWeight" ColumnName="SampleWeight" />
+                <ScalarProperty Name="HaulWeight" ColumnName="HaulWeight" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="NumberOfFisherman" ColumnName="NumberOfFisherman" />
+                <ScalarProperty Name="TrapSetDateTime" ColumnName="TrapSetDateTime" />
+                <ScalarProperty Name="HaulDateTime" ColumnName="HaulDateTime" />
+                <ScalarProperty Name="SamplingDateTime" ColumnName="SamplingDateTime" />
+                <ScalarProperty Name="VesselId" ColumnName="VesselId" />
+                <ScalarProperty Name="LandingSiteId" ColumnName="LandingSiteId" />
+                <ScalarProperty Name="HaulId" ColumnName="HaulId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HaulGearXREFs">
             <EntityTypeMapping TypeName="Isda.Data.HaulGearXREF">
               <MappingFragment StoreEntitySet="HaulGearXREF">
-                <ScalarProperty Name="HaulGearId" ColumnName="HaulGearId" />
-                <ScalarProperty Name="HaulId" ColumnName="HaulId" />
                 <ScalarProperty Name="GearId" ColumnName="GearId" />
+                <ScalarProperty Name="HaulId" ColumnName="HaulId" />
+                <ScalarProperty Name="HaulGearId" ColumnName="HaulGearId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HaulPhotoes">
             <EntityTypeMapping TypeName="Isda.Data.HaulPhoto">
               <MappingFragment StoreEntitySet="HaulPhoto">
-                <ScalarProperty Name="HaulPhotoId" ColumnName="HaulPhotoId" />
-                <ScalarProperty Name="HaulId" ColumnName="HaulId" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="HaulId" ColumnName="HaulId" />
+                <ScalarProperty Name="HaulPhotoId" ColumnName="HaulPhotoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LandingSites">
             <EntityTypeMapping TypeName="Isda.Data.LandingSite">
               <MappingFragment StoreEntitySet="LandingSite">
-                <ScalarProperty Name="LandingSiteId" ColumnName="LandingSiteId" />
-                <ScalarProperty Name="LandingName" ColumnName="LandingName" />
-                <ScalarProperty Name="BodyOfWater" ColumnName="BodyOfWater" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="BodyOfWater" ColumnName="BodyOfWater" />
+                <ScalarProperty Name="LandingName" ColumnName="LandingName" />
+                <ScalarProperty Name="LandingSiteId" ColumnName="LandingSiteId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vessels">
             <EntityTypeMapping TypeName="Isda.Data.Vessel">
               <MappingFragment StoreEntitySet="Vessel">
-                <ScalarProperty Name="VesselId" ColumnName="VesselId" />
-                <ScalarProperty Name="VesselType" ColumnName="VesselType" />
-                <ScalarProperty Name="Engine" ColumnName="Engine" />
-                <ScalarProperty Name="Horsepower" ColumnName="Horsepower" />
-                <ScalarProperty Name="BoatLength" ColumnName="BoatLength" />
-                <ScalarProperty Name="BoatHeight" ColumnName="BoatHeight" />
                 <ScalarProperty Name="BoatWidth" ColumnName="BoatWidth" />
+                <ScalarProperty Name="BoatHeight" ColumnName="BoatHeight" />
+                <ScalarProperty Name="BoatLength" ColumnName="BoatLength" />
+                <ScalarProperty Name="Horsepower" ColumnName="Horsepower" />
+                <ScalarProperty Name="Engine" ColumnName="Engine" />
+                <ScalarProperty Name="VesselType" ColumnName="VesselType" />
+                <ScalarProperty Name="VesselId" ColumnName="VesselId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewHaulDetails">
+            <EntityTypeMapping TypeName="Isda.Data.ViewHaulDetail">
+              <MappingFragment StoreEntitySet="ViewHaulDetail">
+                <ScalarProperty Name="Expr5" ColumnName="Expr5" />
+                <ScalarProperty Name="Expr4" ColumnName="Expr4" />
+                <ScalarProperty Name="BodyOfWater" ColumnName="BodyOfWater" />
+                <ScalarProperty Name="LandingName" ColumnName="LandingName" />
+                <ScalarProperty Name="Expr3" ColumnName="Expr3" />
+                <ScalarProperty Name="HaulGearId" ColumnName="HaulGearId" />
+                <ScalarProperty Name="GearNameLocal" ColumnName="GearNameLocal" />
+                <ScalarProperty Name="GearNameEnglish" ColumnName="GearNameEnglish" />
+                <ScalarProperty Name="GearId" ColumnName="GearId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

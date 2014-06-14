@@ -14,6 +14,11 @@ namespace Isda.Data
     
     public partial class Vessel
     {
+        public Vessel()
+        {
+            this.Hauls = new HashSet<Haul>();
+        }
+    
         public int VesselId { get; set; }
         public string VesselType { get; set; }
         public string Engine { get; set; }
@@ -22,6 +27,6 @@ namespace Isda.Data
         public Nullable<decimal> BoatHeight { get; set; }
         public Nullable<decimal> BoatWidth { get; set; }
     
-        public virtual Haul Haul { get; set; }
+        public virtual ICollection<Haul> Hauls { get; set; }
     }
 }
