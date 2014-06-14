@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using Isda.Data;
 
@@ -49,12 +50,14 @@ namespace Isda.ServiceHost
             
         }
 
-        //public Haul[] GetHauls()
-        //{
-        //    using (var context = new HackathonEntities())
-        //    {
-          
-        //    }
-        //}
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
+        public Haul[] GetHauls()
+        {
+           return new Haul[]
+           {
+               new Haul(){HaulId = 1, FishType = "pops"}, 
+               new Haul(){HaulId = 2, FishType = "pops2"}
+           };
+        }
     }
 }

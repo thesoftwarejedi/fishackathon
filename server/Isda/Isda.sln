@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isda.Web", "Isda.Web\Isda.Web.csproj", "{4886F38B-CC51-4D89-B491-087F53B7CA24}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B3C335E7-E58C-4484-B0AF-A0A7332D3CB1} = {B3C335E7-E58C-4484-B0AF-A0A7332D3CB1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isda.Data", "Isda.Data\Isda.Data.csproj", "{7D6C6F99-BE74-4BF3-8F14-5DDDF124B39E}"
 EndProject
