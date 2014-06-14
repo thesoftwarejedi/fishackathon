@@ -46,6 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CountAndWeightByLongLat_Result.cs">
+      <DependentUpon>HackathonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeltaOverTimeByLanding_Result.cs">
+      <DependentUpon>HackathonModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeltaOverTimeByLongLat_Result.cs">
+      <DependentUpon>HackathonModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Gear.cs">
       <DependentUpon>HackathonModel.tt</DependentUpon>
     </Compile>
