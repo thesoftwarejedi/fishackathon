@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isda.Data", "Isda.Data\Isda
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isda.Web.Collection", "Isda.Web.Collection\Isda.Web.Collection.csproj", "{0E6E0E43-235D-4824-B44D-861D82D91758}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nothing", "Nothing\Nothing.csproj", "{907CBDDD-6CDC-494E-9C84-7B1F89E56680}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0E6E0E43-235D-4824-B44D-861D82D91758}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E6E0E43-235D-4824-B44D-861D82D91758}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E6E0E43-235D-4824-B44D-861D82D91758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{907CBDDD-6CDC-494E-9C84-7B1F89E56680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{907CBDDD-6CDC-494E-9C84-7B1F89E56680}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{907CBDDD-6CDC-494E-9C84-7B1F89E56680}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{907CBDDD-6CDC-494E-9C84-7B1F89E56680}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
