@@ -1,0 +1,14 @@
+<ion-view title="Collect">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <h1>Collect</h1>
+    <form>
+        Latitude : <input type="number" step="any" ng-model="philippines.lat" />
+        Longitude : <input type="number" step="any" ng-model="philippines.lng" />
+        Zoom : <input type="number" step="any" ng-model="philippines.zoom" />
+    </form>
+    <leaflet center="philippines" defaults="defaults" width="640" height="400"></leaflet>    
+  </ion-content>
+</ion-view>
