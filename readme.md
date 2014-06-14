@@ -4,7 +4,7 @@
 
 Team:
 
-* Brian
+* Bryan
 * Dana
 * Eric
 * Eugene
