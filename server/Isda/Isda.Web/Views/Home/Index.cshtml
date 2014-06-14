@@ -11,34 +11,12 @@
     </style>
 <script type="text/javascript">
     var map;
-    //function initialize() {
-    //    var mapOptions = {
-    //        center: new google.maps.LatLng(12.1252, 122.433523),
-    //        zoom: 6,
-    //        mapTypeId: google.maps.MapTypeId.SATELLITE
-    //    };
-    //    var map = new google.maps.Map(document.getElementById("map-canvas"),
-    //        mapOptions);
-
-       
-    //    var pointArray = new google.maps.MVCArray(taxiData);
-
-    //    var heatmap = new google.maps.visualization.HeatmapLayer({
-    //        data: pointArray
-    //    });
-    //    heatmap.setMap(map);
-    //    heatmap.set('radius', heatmap.get('radius') ? null : 20);
-    //}
-
 
     $(function () {
-     
-     
-
 
         $.get("http://localhost:32809/api/CountAndWeight", function (data, status) {
            var taxiData = data.map(function(e) {
-                return new google.maps.LatLng(e.Latitude, e.longitude);
+               return { location: new google.maps.LatLng(e.Latitude, e.longitude), weight: e.TotalCount };
             });
             var mapOptions = {
                 center: new google.maps.LatLng(12.1252, 122.433523),
@@ -48,25 +26,26 @@
             map = new google.maps.Map(document.getElementById("map-canvas"),
                 mapOptions);
 
-
             var pointArray = new google.maps.MVCArray(taxiData);
 
             var heatmap = new google.maps.visualization.HeatmapLayer({
-                data: pointArray
+                data: pointArray,
+                radius: 40
             });
             heatmap.setMap(map);
            
             google.maps.event.addListener(map, 'zoom_changed', function () {
-              // put zoom changes code
+                var bounds = map.getBounds();
+
             });
         });
     });
 
 
     function Update() {
-        $.get("http://localhost:32809/api/CountAndWeight?start=" + $('#startDate').val() + "&end=" + $('#endDate').val(), function(data, status) {
+        $.get("http://localhost:32809/api/CountAndWeight?start=" + $('#startDate').val() + "&end=" + $('#endDate').val() + "&precision=4", function (data, status) {
             var taxiData = data.map(function(e) {
-                return new google.maps.LatLng(e.Latitude, e.longitude);
+                return { location: new google.maps.LatLng(e.Latitude, e.longitude), weight: e.TotalCount };
             });
             var mapOptions = {
                 center: new google.maps.LatLng(12.1252, 122.433523),
@@ -80,7 +59,8 @@
             var pointArray = new google.maps.MVCArray(taxiData);
 
             var heatmap = new google.maps.visualization.HeatmapLayer({
-                data: pointArray
+                data: pointArray,
+                radius: 40
             });
             heatmap.setMap(map);
         });
