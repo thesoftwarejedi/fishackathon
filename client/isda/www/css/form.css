@@ -27,6 +27,28 @@ body {
 .form .container .form-group .add-photo p:hover {
   color: black;
 }
+.controls {
+  width: 320px;
+}
+.controls a {
+  background: #428bca;
+  color: #FFF;
+  width: 49%;
+  display: block;
+  float: left;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 1%;
+  border-radius: 4px;
+}
+.controls a:hover {
+  background: #3071a9;
+  text-decoration: none;
+}
+.controls a span {
+  font-size: .8em;
+}
 .nav-tabs {
   margin-top: 20px;
 }
