@@ -30,9 +30,10 @@
     //    heatmap.set('radius', heatmap.get('radius') ? null : 20);
     //}
 
+
     $(function () {
      
-       
+     
 
 
         $.get("http://localhost:32809/api/CountAndWeight", function (data, status) {
@@ -55,9 +56,12 @@
             });
             heatmap.setMap(map);
            
-         
+            google.maps.event.addListener(map, 'zoom_changed', function () {
+              // put zoom changes code
+            });
         });
     });
+
 
     function Update() {
         $.get("http://localhost:32809/api/CountAndWeight?start=" + $('#startDate').val() + "&end=" + $('#endDate').val(), function(data, status) {
