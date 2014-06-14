@@ -29,7 +29,7 @@ namespace Isda.ServiceHost
             int[] gear
             );
 
-      //  [OperationContract]
-      //  Haul[] GetHauls();
+        [OperationContract]
+        Haul[] GetHauls();
     }
 }

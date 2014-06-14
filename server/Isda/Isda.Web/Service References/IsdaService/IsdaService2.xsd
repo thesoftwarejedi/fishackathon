@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:54300/IsdaService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:54300/IsdaService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Isda.Data" />
+  <xs:element name="SubmitHaulData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="landingSiteId" type="xs:int" />
+        <xs:element minOccurs="0" name="vesselId" type="xs:int" />
+        <xs:element minOccurs="0" name="sampleDateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="haulDateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="trapSetTime" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="numberOfFisherman" type="xs:int" />
+        <xs:element minOccurs="0" name="notes" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="longitude" nillable="true" type="xs:decimal" />
+        <xs:element minOccurs="0" name="latitude" nillable="true" type="xs:decimal" />
+        <xs:element minOccurs="0" name="haulWeight" type="xs:decimal" />
+        <xs:element minOccurs="0" name="sampleWeight" type="xs:decimal" />
+        <xs:element minOccurs="0" name="fishType" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="gear" nillable="true" type="q1:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubmitHaulDataResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetHauls">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetHaulsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Isda.Data" minOccurs="0" name="GetHaulsResult" nillable="true" type="q2:ArrayOfHaul" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

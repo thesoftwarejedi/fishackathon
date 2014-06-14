@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Isda.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Isda.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfHaul">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Haul" nillable="true" type="tns:Haul" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHaul" nillable="true" type="tns:ArrayOfHaul" />
+  <xs:complexType name="Haul">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FishType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HaulDateTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="HaulGearXREFs" nillable="true" type="tns:ArrayOfHaulGearXREF" />
+      <xs:element minOccurs="0" name="HaulId" type="xs:int" />
+      <xs:element minOccurs="0" name="HaulPhotoes" nillable="true" type="tns:ArrayOfHaulPhoto" />
+      <xs:element minOccurs="0" name="HaulWeight" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LandingSite" nillable="true" type="tns:LandingSite" />
+      <xs:element minOccurs="0" name="LandingSiteId" type="xs:int" />
+      <xs:element minOccurs="0" name="Latitude" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Longitude" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NumberOfFisherman" type="xs:int" />
+      <xs:element minOccurs="0" name="SampleWeight" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SamplingDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TrapSetDateTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Vessel" nillable="true" type="tns:Vessel" />
+      <xs:element minOccurs="0" name="VesselId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Haul" nillable="true" type="tns:Haul" />
+  <xs:complexType name="ArrayOfHaulGearXREF">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HaulGearXREF" nillable="true" type="tns:HaulGearXREF" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHaulGearXREF" nillable="true" type="tns:ArrayOfHaulGearXREF" />
+  <xs:complexType name="HaulGearXREF">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Gear" nillable="true" type="tns:Gear" />
+      <xs:element minOccurs="0" name="GearId" type="xs:int" />
+      <xs:element minOccurs="0" name="Haul" nillable="true" type="tns:Haul" />
+      <xs:element minOccurs="0" name="HaulGearId" type="xs:int" />
+      <xs:element minOccurs="0" name="HaulId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HaulGearXREF" nillable="true" type="tns:HaulGearXREF" />
+  <xs:complexType name="Gear">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GearId" type="xs:int" />
+      <xs:element minOccurs="0" name="GearNameEnglish" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GearNameLocal" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HaulGearXREFs" nillable="true" type="tns:ArrayOfHaulGearXREF" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Gear" nillable="true" type="tns:Gear" />
+  <xs:complexType name="ArrayOfHaulPhoto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="HaulPhoto" nillable="true" type="tns:HaulPhoto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHaulPhoto" nillable="true" type="tns:ArrayOfHaulPhoto" />
+  <xs:complexType name="HaulPhoto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Haul" nillable="true" type="tns:Haul" />
+      <xs:element minOccurs="0" name="HaulId" type="xs:int" />
+      <xs:element minOccurs="0" name="HaulPhotoId" type="xs:int" />
+      <xs:element minOccurs="0" name="Image" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="HaulPhoto" nillable="true" type="tns:HaulPhoto" />
+  <xs:complexType name="LandingSite">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BodyOfWater" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Hauls" nillable="true" type="tns:ArrayOfHaul" />
+      <xs:element minOccurs="0" name="LandingName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LandingSiteId" type="xs:int" />
+      <xs:element minOccurs="0" name="Latitude" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Longitude" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LandingSite" nillable="true" type="tns:LandingSite" />
+  <xs:complexType name="Vessel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BoatHeight" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BoatLength" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="BoatWidth" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Engine" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Haul" nillable="true" type="tns:Haul" />
+      <xs:element minOccurs="0" name="Horsepower" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VesselId" type="xs:int" />
+      <xs:element minOccurs="0" name="VesselType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Vessel" nillable="true" type="tns:Vessel" />
+</xs:schema>
