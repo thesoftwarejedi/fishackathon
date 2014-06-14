@@ -41,7 +41,7 @@ body{
 }
 
 .controls{
-	width: 320px;
+	width: 100%;
 	//position: fixed;
 	//bottom: 3px;
 	//right: 3px;
@@ -55,7 +55,7 @@ body{
 		text-align: center;
 		padding-top: 10px;
 		padding-bottom: 10px;
-		margin-left: 1%;
+		margin-right: 1%;
 		border-radius: 4px;
 		&:hover{
 			background: darken(@primary, 10%);
@@ -67,92 +67,32 @@ body{
 	}
 }
 
-.nav-tabs{
-	margin-top: 20px;
-}
-
-.tab-pane{
-	padding-top: 30px;
-	padding-bottom: 20px;
-	ul{
-		list-style: none;
-		padding: 0;
-	}
-}
-
-.affix{
-	top: 0;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	border-bottom: 1px solid #ccc;
-	z-index: 5;
-}
-
-p.narrative{
-	font-family: Georgia, serif;
-	font-size: 1.1em;
-	line-height: 130%;
-	margin-bottom: 25px;
-}
-
-.percentage{
-	font-weight: bold;
-	&.featured{
-		color: @primary;
-	}
-}
-
-.bars{
-	li{
-		margin-bottom: 20px;
-		font-size: .9em;
-		p{
-			margin-bottom: 4px;
-			&.narrative{
-				padding-top: 5px;
-				font-style: italic;
-				color: #777;
-			}
-		}
-	}
-}
-
-.progress{
-	border-radius: 0px;
-	margin-bottom: 0px;
-	&.progress-standard{
-		.progress-bar{
-			background-image: none !important;
-			background: #666;
-			
-		}
-	}
-	.progress-featured{
-		//background-color: #1AA4D9;
-		background-image: none !important;
-	}
-}
-
-
-
-.dropdown{
-	margin-bottom: 20px;
-	.dropdown-toggle{
-		background: #BAE0F3;
-		text-align: left;
-		.caret{
-			float: right;
-			display: block;
-			margin-top: 8px;
-		}
-	}
-	.dropdown-menu{
-		width: 100%;
-	}
-}
-
-.btn-justified{
+.add-photo{
+	background: #ccc;
 	width: 100%;
+	padding-top: 100px;
+	border-radius: 3px;
+	padding-bottom: 50px;
+	text-align: center;
+	margin-bottom: 40px;
+	p{
+		background: #dedede;
+		cursor: pointer;
+		width: 320px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		margin: 0 auto;
+		border-radius: 3px;
+		margin-bottom: 20px;
+		border: 2px dashed #efefef;
+		&:hover{
+			background: #eeeeee;
+		}
+	}
+	.diagrams{
+		width: 100%;
+		opacity: .8;
+	}
 }
 
 .container {

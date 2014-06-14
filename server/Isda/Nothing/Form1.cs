@@ -79,14 +79,14 @@ namespace Nothing
             var vesselIds = blah.Vessels.Select(a => a.VesselId).Distinct().ToArray();
             var landingSiteIds = blah.LandingSites.Select(a => a.LandingSiteId).Distinct().ToArray();
             
-            foreach (var i in Enumerable.Repeat(1,1000)) {
+            foreach (var i in Enumerable.Repeat(1,20000)) {
                 var h = new Haul() {
                     FishType = fishTypes[r.Next(0, fishTypes.Length - 1)],
                     HaulDateTime = now - new TimeSpan(r.Next(1, 120), r.Next(0,23), r.Next(0,60), 0),
                     HaulWeight = r.Next(3,100),
                     LandingSiteId = landingSiteIds[r.Next(0, landingSiteIds.Length - 1)],
-                    Latitude = (decimal)r.Next(5439382, 18915121) / (decimal)1000000,
-                    Longitude = (decimal)r.Next(118619926, 127650688) / (decimal)1000000,
+                    Latitude = (decimal)r.Next(8439382, 15915121) / (decimal)1000000,
+                    Longitude = (decimal)r.Next(121619926, 124650688) / (decimal)1000000,
                     Notes = null,
                     NumberOfFisherman = r.Next(1, 10),
                     SampleWeight = r.Next(1, 40)/4,

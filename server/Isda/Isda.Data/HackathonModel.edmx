@@ -20,15 +20,15 @@
           <Property Name="HaulId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LandingSiteId" Type="int" Nullable="false" />
           <Property Name="VesselId" Type="int" Nullable="false" />
-          <Property Name="SamplingDateTime" Type="datetime" Nullable="false" />
-          <Property Name="HaulDateTime" Type="datetime" />
-          <Property Name="TrapSetDateTime" Type="datetime" />
+          <Property Name="SamplingDateTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="HaulDateTime" Type="datetime2" Precision="7" />
+          <Property Name="TrapSetDateTime" Type="datetime2" Precision="7" />
           <Property Name="NumberOfFisherman" Type="int" Nullable="false" />
           <Property Name="Notes" Type="nvarchar(max)" />
-          <Property Name="Longitude" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Latitude" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="HaulWeight" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="SampleWeight" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="HaulWeight" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="SampleWeight" Type="decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="FishType" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="HaulGearXREF">
@@ -153,6 +153,32 @@ warning 6002: The table/view 'Hackathon.dbo.ViewHaulDetail' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CountAndWeightByLongLat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date1" Type="datetime2" Mode="In" />
+          <Parameter Name="date2" Type="datetime2" Mode="In" />
+          <Parameter Name="precision" Type="int" Mode="In" />
+          <Parameter Name="lat1" Type="decimal" Mode="In" />
+          <Parameter Name="lng1" Type="decimal" Mode="In" />
+          <Parameter Name="lat2" Type="decimal" Mode="In" />
+          <Parameter Name="lng2" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="DeltaOverTimeByLanding" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date1" Type="datetime2" Mode="In" />
+          <Parameter Name="date2" Type="datetime2" Mode="In" />
+          <Parameter Name="date3" Type="datetime2" Mode="In" />
+          <Parameter Name="date4" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="DeltaOverTimeByLongLat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date1" Type="datetime2" Mode="In" />
+          <Parameter Name="date2" Type="datetime2" Mode="In" />
+          <Parameter Name="date3" Type="datetime2" Mode="In" />
+          <Parameter Name="date4" Type="datetime2" Mode="In" />
+          <Parameter Name="precision" Type="int" Mode="In" />
+          <Parameter Name="lat1" Type="decimal" Mode="In" />
+          <Parameter Name="lng1" Type="decimal" Mode="In" />
+          <Parameter Name="lat2" Type="decimal" Mode="In" />
+          <Parameter Name="lng2" Type="decimal" Mode="In" />
+        </Function>
         <EntityContainer Name="HackathonModelStoreContainer">
           <EntitySet Name="Gear" EntityType="Self.Gear" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Haul" EntityType="Self.Haul" Schema="dbo" store:Type="Tables" />
@@ -226,6 +252,32 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
             <End Role="Haul" EntitySet="Hauls" />
             <End Role="HaulPhoto" EntitySet="HaulPhotoes" />
           </AssociationSet>
+          <FunctionImport Name="DeltaOverTimeByLanding" ReturnType="Collection(Isda.Data.DeltaOverTimeByLanding_Result)">
+            <Parameter Name="date1" Mode="In" Type="DateTime" />
+            <Parameter Name="date2" Mode="In" Type="DateTime" />
+            <Parameter Name="date3" Mode="In" Type="DateTime" />
+            <Parameter Name="date4" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="CountAndWeightByLongLat" ReturnType="Collection(Isda.Data.CountAndWeightByLongLat_Result)">
+            <Parameter Name="date1" Mode="In" Type="DateTime" />
+            <Parameter Name="date2" Mode="In" Type="DateTime" />
+            <Parameter Name="precision" Mode="In" Type="Int32" />
+            <Parameter Name="lat1" Mode="In" Type="Decimal" />
+            <Parameter Name="lng1" Mode="In" Type="Decimal" />
+            <Parameter Name="lat2" Mode="In" Type="Decimal" />
+            <Parameter Name="lng2" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="DeltaOverTimeByLongLat" ReturnType="Collection(Isda.Data.DeltaOverTimeByLongLat_Result)">
+            <Parameter Name="date1" Mode="In" Type="DateTime" />
+            <Parameter Name="date2" Mode="In" Type="DateTime" />
+            <Parameter Name="date3" Mode="In" Type="DateTime" />
+            <Parameter Name="date4" Mode="In" Type="DateTime" />
+            <Parameter Name="precision" Mode="In" Type="Int32" />
+            <Parameter Name="lat1" Mode="In" Type="Decimal" />
+            <Parameter Name="lng1" Mode="In" Type="Decimal" />
+            <Parameter Name="lat2" Mode="In" Type="Decimal" />
+            <Parameter Name="lng2" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Gear">
           <Key>
@@ -243,15 +295,15 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
           <Property Name="HaulId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LandingSiteId" Type="Int32" Nullable="false" />
           <Property Name="VesselId" Type="Int32" Nullable="false" />
-          <Property Name="SamplingDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="HaulDateTime" Type="DateTime" Precision="3" />
-          <Property Name="TrapSetDateTime" Type="DateTime" Precision="3" />
+          <Property Name="SamplingDateTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="HaulDateTime" Type="DateTime" Precision="7" />
+          <Property Name="TrapSetDateTime" Type="DateTime" Precision="7" />
           <Property Name="NumberOfFisherman" Type="Int32" Nullable="false" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Longitude" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Latitude" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="HaulWeight" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="SampleWeight" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="HaulWeight" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="SampleWeight" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
           <Property Name="FishType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="LandingSite" Relationship="Isda.Data.FK_Haul_LandingSite" FromRole="Haul" ToRole="LandingSite" />
           <NavigationProperty Name="Vessel" Relationship="Isda.Data.FK_Haul_Vessel" FromRole="Haul" ToRole="Vessel" />
@@ -383,6 +435,23 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="DeltaOverTimeByLanding_Result">
+          <Property Type="String" Name="landingname" Nullable="false" MaxLength="255" />
+          <Property Type="Decimal" Name="WeightDelta" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Int32" Name="CountDelta" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CountAndWeightByLongLat_Result">
+          <Property Type="Decimal" Name="Latitude" Nullable="true" Precision="9" Scale="6" />
+          <Property Type="Decimal" Name="longitude" Nullable="true" Precision="9" Scale="6" />
+          <Property Type="Decimal" Name="AvgHaulWeight" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Int32" Name="TotalCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="DeltaOverTimeByLongLat_Result">
+          <Property Type="Decimal" Name="Latitude" Nullable="true" Precision="9" Scale="6" />
+          <Property Type="Decimal" Name="longitude" Nullable="true" Precision="9" Scale="6" />
+          <Property Type="Decimal" Name="WeightDelta" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Int32" Name="CountDelta" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -474,6 +543,35 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeltaOverTimeByLanding" FunctionName="HackathonModel.Store.DeltaOverTimeByLanding">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Isda.Data.DeltaOverTimeByLanding_Result">
+                <ScalarProperty Name="landingname" ColumnName="landingname" />
+                <ScalarProperty Name="WeightDelta" ColumnName="WeightDelta" />
+                <ScalarProperty Name="CountDelta" ColumnName="CountDelta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CountAndWeightByLongLat" FunctionName="HackathonModel.Store.CountAndWeightByLongLat">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Isda.Data.CountAndWeightByLongLat_Result">
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="AvgHaulWeight" ColumnName="AvgHaulWeight" />
+                <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeltaOverTimeByLongLat" FunctionName="HackathonModel.Store.DeltaOverTimeByLongLat">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Isda.Data.DeltaOverTimeByLongLat_Result">
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="WeightDelta" ColumnName="WeightDelta" />
+                <ScalarProperty Name="CountDelta" ColumnName="CountDelta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

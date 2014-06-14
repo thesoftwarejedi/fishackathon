@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript"src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4DmkFhwH5AJISoaGMs4nMJhQwG8zfoeA&libraries=visualization"></script>
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 100% }
+    </style>
+<script type="text/javascript">
+    var map;
+
+    $(function () {
+
+        $.get("http://localhost:32809/api/CountAndWeight", function (data, status) {
+           var taxiData = data.map(function(e) {
+               return { location: new google.maps.LatLng(e.Latitude, e.longitude), weight: e.TotalCount };
+            });
+            var mapOptions = {
+                center: new google.maps.LatLng(12.1252, 122.433523),
+                zoom: 6,
+                mapTypeId: google.maps.MapTypeId.SATELLITE
+            };
+            map = new google.maps.Map(document.getElementById("map-canvas"),
+                mapOptions);
+
+            var pointArray = new google.maps.MVCArray(taxiData);
+
+            var heatmap = new google.maps.visualization.HeatmapLayer({
+                data: pointArray,
+                radius: 40
+            });
+            heatmap.setMap(map);
+           
+            google.maps.event.addListener(map, 'zoom_changed', function () {
+                var bounds = map.getBounds();
+
+            });
+        });
+    });
+
+
+    function Update() {
+        $.get("http://localhost:32809/api/CountAndWeight?start=" + $('#startDate').val() + "&end=" + $('#endDate').val() + "&precision=4", function (data, status) {
+            var taxiData = data.map(function(e) {
+                return { location: new google.maps.LatLng(e.Latitude, e.longitude), weight: e.TotalCount };
+            });
+            var mapOptions = {
+                center: new google.maps.LatLng(12.1252, 122.433523),
+                zoom: 6,
+                mapTypeId: google.maps.MapTypeId.SATELLITE
+            };
+            map = new google.maps.Map(document.getElementById("map-canvas"),
+                mapOptions);
+
+
+            var pointArray = new google.maps.MVCArray(taxiData);
+
+            var heatmap = new google.maps.visualization.HeatmapLayer({
+                data: pointArray,
+                radius: 40
+            });
+            heatmap.setMap(map);
+        });
+    }
+    
+
+</script>
+
+
+
+
+<h2>Index</h2>
+<div class="filters">
+    <label for="startDate">Start Date:</label>
+    <input type="text" id="startDate"/>
+    
+    <label for="endDate">End Date:</label>
+    <input type="text" id="endDate"/>
+    
+    <a href="#" onclick="Update();return false;">Update</a>
+</div>
+ <div id="map-canvas"/>

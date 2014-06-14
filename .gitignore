@@ -3,3 +3,8 @@
 */bin/
 bin/
 obj/
+*.suo
+*.user
+server/Isda/Isda.Web/Web.config
+server/Isda/Isda.sln
+server/Isda/packages/repositories.config
