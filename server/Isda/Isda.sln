@@ -1,7 +1,8 @@
 ﻿
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isda.Web", "Isda.Web\Isda.Web.csproj", "{4886F38B-CC51-4D89-B491-087F53B7CA24}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B3C335E7-E58C-4484-B0AF-A0A7332D3CB1} = {B3C335E7-E58C-4484-B0AF-A0A7332D3CB1}
@@ -10,45 +11,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isda.Data", "Isda.Data\Isda.Data.csproj", "{7D6C6F99-BE74-4BF3-8F14-5DDDF124B39E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isda.ServiceHost", "Isda.ServiceHost\Isda.ServiceHost.csproj", "{B3C335E7-E58C-4484-B0AF-A0A7332D3CB1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isda.Web.Collection", "Isda.Web.Collection\Isda.Web.Collection.csproj", "{0E6E0E43-235D-4824-B44D-861D82D91758}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4886F38B-CC51-4D89-B491-087F53B7CA24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4886F38B-CC51-4D89-B491-087F53B7CA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4886F38B-CC51-4D89-B491-087F53B7CA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4886F38B-CC51-4D89-B491-087F53B7CA24}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7D6C6F99-BE74-4BF3-8F14-5DDDF124B39E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7D6C6F99-BE74-4BF3-8F14-5DDDF124B39E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7D6C6F99-BE74-4BF3-8F14-5DDDF124B39E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7D6C6F99-BE74-4BF3-8F14-5DDDF124B39E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B3C335E7-E58C-4484-B0AF-A0A7332D3CB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3C335E7-E58C-4484-B0AF-A0A7332D3CB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3C335E7-E58C-4484-B0AF-A0A7332D3CB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3C335E7-E58C-4484-B0AF-A0A7332D3CB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E6E0E43-235D-4824-B44D-861D82D91758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E6E0E43-235D-4824-B44D-861D82D91758}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E6E0E43-235D-4824-B44D-861D82D91758}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E6E0E43-235D-4824-B44D-861D82D91758}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-EndGlobal
-<<<<<<< HEAD
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isda.Web", "Isda.Web\Isda.Web.csproj", "{4886F38B-CC51-4D89-B491-087F53B7CA24}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isda.Data", "Isda.Data\Isda.Data.csproj", "{7D6C6F99-BE74-4BF3-8F14-5DDDF124B39E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isda.Web.Collection", "Isda.Web.Collection\Isda.Web.Collection.csproj", "{0E6E0E43-235D-4824-B44D-861D82D91758}"
 EndProject
@@ -68,6 +30,8 @@ Global
 		{7D6C6F99-BE74-4BF3-8F14-5DDDF124B39E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D6C6F99-BE74-4BF3-8F14-5DDDF124B39E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D6C6F99-BE74-4BF3-8F14-5DDDF124B39E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3C335E7-E58C-4484-B0AF-A0A7332D3CB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3C335E7-E58C-4484-B0AF-A0A7332D3CB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E6E0E43-235D-4824-B44D-861D82D91758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E6E0E43-235D-4824-B44D-861D82D91758}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E6E0E43-235D-4824-B44D-861D82D91758}.Release|Any CPU.ActiveCfg = Release|Any CPU
