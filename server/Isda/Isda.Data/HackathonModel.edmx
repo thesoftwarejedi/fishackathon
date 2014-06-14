@@ -157,6 +157,10 @@ warning 6002: The table/view 'Hackathon.dbo.ViewHaulDetail' does not have a prim
           <Parameter Name="date1" Type="datetime2" Mode="In" />
           <Parameter Name="date2" Type="datetime2" Mode="In" />
           <Parameter Name="precision" Type="int" Mode="In" />
+          <Parameter Name="lat1" Type="decimal" Mode="In" />
+          <Parameter Name="lng1" Type="decimal" Mode="In" />
+          <Parameter Name="lat2" Type="decimal" Mode="In" />
+          <Parameter Name="lng2" Type="decimal" Mode="In" />
         </Function>
         <Function Name="DeltaOverTimeByLanding" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="date1" Type="datetime2" Mode="In" />
@@ -261,6 +265,10 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
             <Parameter Name="date1" Mode="In" Type="DateTime" />
             <Parameter Name="date2" Mode="In" Type="DateTime" />
             <Parameter Name="precision" Mode="In" Type="Int32" />
+            <Parameter Name="lat1" Mode="In" Type="Decimal" />
+            <Parameter Name="lng1" Mode="In" Type="Decimal" />
+            <Parameter Name="lat2" Mode="In" Type="Decimal" />
+            <Parameter Name="lng2" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Gear">

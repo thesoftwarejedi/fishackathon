@@ -82,7 +82,7 @@ namespace Isda.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DeltaOverTimeByLongLat_Result>("DeltaOverTimeByLongLat", date1Parameter, date2Parameter, date3Parameter, date4Parameter, precisionParameter);
         }
     
-        public virtual ObjectResult<CountAndWeightByLongLat_Result> CountAndWeightByLongLat(Nullable<System.DateTime> date1, Nullable<System.DateTime> date2, Nullable<int> precision)
+        public virtual ObjectResult<CountAndWeightByLongLat_Result> CountAndWeightByLongLat(Nullable<System.DateTime> date1, Nullable<System.DateTime> date2, Nullable<int> precision, Nullable<decimal> lat1, Nullable<decimal> lng1, Nullable<decimal> lat2, Nullable<decimal> lng2)
         {
             var date1Parameter = date1.HasValue ?
                 new ObjectParameter("date1", date1) :
@@ -96,7 +96,23 @@ namespace Isda.Data
                 new ObjectParameter("precision", precision) :
                 new ObjectParameter("precision", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CountAndWeightByLongLat_Result>("CountAndWeightByLongLat", date1Parameter, date2Parameter, precisionParameter);
+            var lat1Parameter = lat1.HasValue ?
+                new ObjectParameter("lat1", lat1) :
+                new ObjectParameter("lat1", typeof(decimal));
+    
+            var lng1Parameter = lng1.HasValue ?
+                new ObjectParameter("lng1", lng1) :
+                new ObjectParameter("lng1", typeof(decimal));
+    
+            var lat2Parameter = lat2.HasValue ?
+                new ObjectParameter("lat2", lat2) :
+                new ObjectParameter("lat2", typeof(decimal));
+    
+            var lng2Parameter = lng2.HasValue ?
+                new ObjectParameter("lng2", lng2) :
+                new ObjectParameter("lng2", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CountAndWeightByLongLat_Result>("CountAndWeightByLongLat", date1Parameter, date2Parameter, precisionParameter, lat1Parameter, lng1Parameter, lat2Parameter, lng2Parameter);
         }
     }
 }
