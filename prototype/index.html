@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Theme Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="styles/css/fishackathon.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+    <body role="enumerator">
+
+    <div class="form">
+      <div class="container">
+        <div class="row" >
+            <div class="col-xs-12">
+                <form role="form">
+                  <div class="form-group">
+                    <label for="landing-site">Landing Site</label>
+                    <select class="form-control" id="landing-site">
+                      <option>CL</option>
+                      <option>AB</option>
+                      <option>CD</option>
+                      <option>EF</option>
+                      <option>GH</option>
+                    </select>
+
+                    <label for="municipality">Municipality</label>
+                    <select class="form-control" id="municipality">
+                      <option>Bayabas</option>
+                      <option>Cantilan</option>
+                      <option>Hinatuan</option>
+                      <option>Lianga</option>
+                      <option>Lingig</option>
+                      <option>Madrid</option>
+                      <option>Marihatag</option>
+                      <option>Tagbina</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="catch-weight">Weight of Catch (kg)</label>
+                    <input class="form-control" id="catch-weight" placeholder="#">
+
+                    <label for="catch-sample">Weight of Sample (kg)</label>
+                    <input class="form-control" id="catch-sample" placeholder="#">
+                  </div>
+                  <div class="form-group">
+                        <label for="fishing-ground">Body of Water / Fishing Ground</label>
+                        <div id="fishing-ground"></div>
+                  </div>
+                  <div class="form-group">
+                    <label for="time-set">Time Set</label>
+                    <input class="form-control" id="time-set" placeholder="24:00">
+
+                    <label for="date-set">Date Set</label>
+                    <input class="form-control" id="date-set" placeholder="4/5/14">
+
+                    <label for="time-hualed">Time Hualed</label>
+                    <input class="form-control" id="time-hualed" placeholder="24:00">
+
+                    <label for="date-hualed">Date Hualed</label>
+                    <input class="form-control" id="date-hualed" placeholder="4/5/14">
+
+                    <label for="huals-count">Number of Huals</label>
+                    <input class="form-control" id="huals-count" placeholder="#">
+
+                    <label for="fishers-count">Number of Fishers</label>
+                    <input class="form-control" id="fishers-count" placeholder="#">
+                </div>
+                <div class="form-group">
+                    <label for="vessel-type">Vessel Type</label>
+                    <select class="form-control" id="vessel-type">
+                      <option>M</option>
+                      <option>A</option>
+                      <option>C</option>
+                      <option>R</option>
+                      <option>G</option>
+                    </select>
+
+                    <label for="engine">Engine</label>
+                    <select class="form-control" id="engine">
+                      <option>Briggs</option>
+                      <option>Stratton</option>
+                      <option>Brush</option>
+                      <option>Stepper</option>
+                      <option>Hybrid</option>
+                    </select>
+
+                    <label for="hp">Horse Power</label>
+                    <input class="form-control" id="hp" placeholder="#">
+
+                    <label for="boat-length">Length of Boat (m)</label>
+                    <input class="form-control" id="boat-length" placeholder="m">
+
+                    <label for="boat-height">Height of Boat (m)</label>
+                    <input class="form-control" id="boat-height" placeholder="m">
+
+                    <label for="boat-width">Width of Boat (m)</label>
+                    <input class="form-control" id="boat-width" placeholder="m">
+                  </div>
+                  <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea class="form-control" id="notes" rows="5"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="photo">Add Photos</label>
+                    <div class="add-photo">
+                        <p>Select to Add Photos</p>
+                    </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/fishackathon.js"></script>
+  </body>
+</html>
