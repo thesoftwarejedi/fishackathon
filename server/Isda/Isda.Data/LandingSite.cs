@@ -22,8 +22,8 @@ namespace Isda.Data
         public int LandingSiteId { get; set; }
         public string LandingName { get; set; }
         public string BodyOfWater { get; set; }
-        public decimal Longitude { get; set; }
-        public decimal Latitude { get; set; }
+        public Nullable<decimal> Longitude { get; set; }
+        public Nullable<decimal> Latitude { get; set; }
     
         public virtual ICollection<Haul> Hauls { get; set; }
     }

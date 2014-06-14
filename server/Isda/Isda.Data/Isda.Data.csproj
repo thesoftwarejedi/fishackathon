@@ -80,6 +80,9 @@
     <Compile Include="Vessel.cs">
       <DependentUpon>HackathonModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewHaulDetail.cs">
+      <DependentUpon>HackathonModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

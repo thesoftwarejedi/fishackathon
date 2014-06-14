@@ -5,17 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5271758f59c0429c88b1ed9b4fb7dace" Name="Diagram1">
-        <EntityTypeShape EntityType="Isda.Data.Gear" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Isda.Data.Haul" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Isda.Data.HaulGearXREF" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Isda.Data.HaulPhoto" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Isda.Data.LandingSite" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Isda.Data.Vessel" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
-        <AssociationConnector Association="Isda.Data.FK_HaulGearXREF_Gear" ManuallyRouted="false" />
-        <AssociationConnector Association="Isda.Data.FK_Haul_LandingSite" ManuallyRouted="false" />
-        <AssociationConnector Association="Isda.Data.FK_Haul_Vessel" ManuallyRouted="false" />
-        <AssociationConnector Association="Isda.Data.FK_HaulGearXREF_Haul" ManuallyRouted="false" />
-        <AssociationConnector Association="Isda.Data.FK_HaulPhoto_Haul" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Isda.Data.Gear" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="Isda.Data.Haul" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="Isda.Data.HaulGearXREF" Width="1.5" PointX="5.25" PointY="2.375" />
+        <EntityTypeShape EntityType="Isda.Data.HaulPhoto" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="Isda.Data.LandingSite" Width="1.5" PointX="0.75" PointY="2.25" />
+        <EntityTypeShape EntityType="Isda.Data.Vessel" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="Isda.Data.ViewHaulDetail" Width="1.5" PointX="7.75" PointY="0.75" />
+        <AssociationConnector Association="Isda.Data.FK_HaulGearXREF_Gear" />
+        <AssociationConnector Association="Isda.Data.FK_Haul_LandingSite" />
+        <AssociationConnector Association="Isda.Data.FK_Haul_Vessel" />
+        <AssociationConnector Association="Isda.Data.FK_HaulGearXREF_Haul" />
+        <AssociationConnector Association="Isda.Data.FK_HaulPhoto_Haul" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

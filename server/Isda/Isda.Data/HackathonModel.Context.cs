@@ -31,5 +31,6 @@ namespace Isda.Data
         public DbSet<HaulPhoto> HaulPhotoes { get; set; }
         public DbSet<LandingSite> LandingSites { get; set; }
         public DbSet<Vessel> Vessels { get; set; }
+        public DbSet<ViewHaulDetail> ViewHaulDetails { get; set; }
     }
 }
