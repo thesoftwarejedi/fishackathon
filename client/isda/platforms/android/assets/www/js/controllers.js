@@ -29,4 +29,14 @@ angular.module('starter.controllers', ['leaflet-directive'])
     	maxZoom: 9,
     	minZoom: 6
     };
+
+    $scope.markers = {
+        mainMarker: {
+            lat: 12.1252,
+            lng: 122.1679,
+            focus: true,
+            message: "Move Marker to Fishing Location",
+            draggable: true
+        }
+    };
 })
