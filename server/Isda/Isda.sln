@@ -40,6 +40,7 @@ Global
 		{907CBDDD-6CDC-494E-9C84-7B1F89E56680}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{907CBDDD-6CDC-494E-9C84-7B1F89E56680}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{907CBDDD-6CDC-494E-9C84-7B1F89E56680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{907CBDDD-6CDC-494E-9C84-7B1F89E56680}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
