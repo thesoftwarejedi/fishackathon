@@ -1518,4 +1518,5 @@ C:\Files\fishackathon\client\isda\platforms\android\assets\www\templates\collect
 C:\Files\fishackathon\client\isda\platforms\android\assets\www\templates\menu.html \
 C:\Files\fishackathon\client\isda\platforms\android\assets\www\templates\playlist.html \
 C:\Files\fishackathon\client\isda\platforms\android\assets\www\templates\playlists.html \
+C:\Files\fishackathon\client\isda\platforms\android\assets\www\templates\sync.html \
 C:\Files\fishackathon\client\isda\platforms\android\ant-build\AndroidManifest.xml \

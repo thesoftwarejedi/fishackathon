@@ -35,10 +35,20 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       views: {
         'menuContent' :{
           templateUrl: "templates/collect.html",
-          controller: "LeafletController"
+          controller: "CollectController"
         }
       }
     })
+
+    .state('app.sync', {
+      url: "/sync",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/sync.html",
+          controller: "CollectController"
+        }
+      }
+    })    
 
     .state('app.browse', {
       url: "/browse",
@@ -68,6 +78,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/collect');
 });
 

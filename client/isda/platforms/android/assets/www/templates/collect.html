@@ -13,103 +13,104 @@
                         Zoom : <input type="number" step="any" ng-model="philippines.zoom" />                        
                         <div class="form-group">
                             <label for="landing-site">Landing Site</label>
-                            <select class="form-control" id="landing-site">
-                              <option>CL</option>
-                              <option>AB</option>
-                              <option>CD</option>
-                              <option>EF</option>
-                              <option>GH</option>
+                            <select class="form-control" id="landing-site" ng-model="haul.LandingSiteId">
+                              <option value="1">CL</option>
+                              <option value="2">AB</option>
+                              <option value="3">CD</option>
+                              <option value="4">EF</option>
+                              <option value="5">GH</option>
                             </select>
 
                             <label for="municipality">Municipality</label>
                             <select class="form-control" id="municipality">
-                              <option>Bayabas</option>
-                              <option>Cantilan</option>
-                              <option>Hinatuan</option>
-                              <option>Lianga</option>
-                              <option>Lingig</option>
-                              <option>Madrid</option>
-                              <option>Marihatag</option>
-                              <option>Tagbina</option>
+                              <option value="1">Bayabas</option>
+                              <option value="2">Cantilan</option>
+                              <option value="3">Hinatuan</option>
+                              <option value="4">Lianga</option>
+                              <option value="5">Lingig</option>
+                              <option value="6">Madrid</option>
+                              <option value="7">Marihatag</option>
+                              <option value="8">Tagbina</option>
                             </select>
-                      </div>
-                      <div class="form-group">
-                          <label for="catch-weight">Weight of Catch (kg)</label>
-                          <input class="form-control" id="catch-weight" placeholder="#">
+                        </div>
+                        <div class="form-group">
+                            <label for="catch-weight">Weight of Catch (kg)</label>
+                            <input class="form-control" id="catch-weight" ng-model="haul.HaulWeight" placeholder="#">
 
-                          <label for="catch-sample">Weight of Sample (kg)</label>
-                          <input class="form-control" id="catch-sample" placeholder="#">
-                      </div>
-                      <div class="form-group">
-                          <label for="fishing-ground">Body of Water / Fishing Ground</label>
-                          <div id="fishing-ground">
+                            <label for="catch-sample">Weight of Sample (kg)</label>
+                            <input class="form-control" id="catch-sample" ng-model="haul.SampleWeight" placeholder="#">
+                        </div>
+                        <div class="form-group">
+                            <label for="fishing-ground">Body of Water / Fishing Ground</label>
+                            <div id="fishing-ground">
+                                <leaflet center="philippines" defaults="defaults" markers="markers" width="100%" height="250"></leaflet>
+                                Marker (lat/lng): <input type="number" ng-model="markers.mainMarker.lat" /> <input type="number" ng-model="markers.mainMarker.lng" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="time-set">Time Set</label>
+                            <input class="form-control" id="time-set" ng-model="time.setTime" placeholder="24:00">
 
-                               <leaflet center="philippines" defaults="defaults" markers="markers" width="640" height="400"></leaflet>
-                               Marker (lat/lng): <input type="number" ng-model="markers.mainMarker.lat" /> <input type="number" ng-model="markers.mainMarker.lng" />
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          <label for="time-set">Time Set</label>
-                          <input class="form-control" id="time-set" placeholder="24:00">
+                            <label for="date-set">Date Set</label>
+                            <input class="form-control" id="date-set" ng-model="time.setDate" placeholder="4/5/14">
 
-                          <label for="date-set">Date Set</label>
-                          <input class="form-control" id="date-set" placeholder="4/5/14">
+                            <label for="time-hualed">Time Hualed</label>
+                            <input class="form-control" id="time-hualed" ng-model="time.haulTime" placeholder="24:00">
 
-                          <label for="time-hualed">Time Hualed</label>
-                          <input class="form-control" id="time-hualed" placeholder="24:00">
+                            <label for="date-hualed">Date Hualed</label>
+                            <input class="form-control" id="date-hualed" ng-model="time.haulDate" placeholder="4/5/14">
 
-                          <label for="date-hualed">Date Hualed</label>
-                          <input class="form-control" id="date-hualed" placeholder="4/5/14">
+                            <label for="huals-count">Number of Huals</label>
+                            <input class="form-control" id="huals-count" placeholder="#">
 
-                          <label for="huals-count">Number of Huals</label>
-                          <input class="form-control" id="huals-count" placeholder="#">
+                            <label for="fishers-count">Number of Fishers</label>
+                            <input class="form-control" id="fishers-count" ng-model="haul.NumberOfFisherman" placeholder="#">
+                        </div>
+                        <div class="form-group">
+                            <label for="vessel-type">Vessel Type</label>
+                            <select class="form-control" id="vessel-type">
+                                <option>M</option>
+                                <option>A</option>
+                                <option>C</option>
+                                <option>R</option>
+                                <option>G</option>
+                            </select>
 
-                          <label for="fishers-count">Number of Fishers</label>
-                          <input class="form-control" id="fishers-count" placeholder="#">
-                    </div>
-                    <div class="form-group">
-                          <label for="vessel-type">Vessel Type</label>
-                          <select class="form-control" id="vessel-type">
-                              <option>M</option>
-                              <option>A</option>
-                              <option>C</option>
-                              <option>R</option>
-                              <option>G</option>
-                          </select>
+                            <label for="engine">Engine</label>
+                            <select class="form-control" id="engine">
+                                <option>Briggs</option>
+                                <option>Stratton</option>
+                                <option>Brush</option>
+                                <option>Stepper</option>
+                                <option>Hybrid</option>
+                            </select>
 
-                          <label for="engine">Engine</label>
-                          <select class="form-control" id="engine">
-                              <option>Briggs</option>
-                              <option>Stratton</option>
-                              <option>Brush</option>
-                              <option>Stepper</option>
-                              <option>Hybrid</option>
-                          </select>
+                            <label for="hp">Horse Power</label>
+                            <input class="form-control" id="hp" placeholder="#">
 
-                          <label for="hp">Horse Power</label>
-                          <input class="form-control" id="hp" placeholder="#">
+                            <label for="boat-length">Length of Boat (m)</label>
+                            <input class="form-control" id="boat-length" placeholder="m">
 
-                          <label for="boat-length">Length of Boat (m)</label>
-                          <input class="form-control" id="boat-length" placeholder="m">
+                            <label for="boat-height">Height of Boat (m)</label>
+                            <input class="form-control" id="boat-height" placeholder="m">
 
-                          <label for="boat-height">Height of Boat (m)</label>
-                          <input class="form-control" id="boat-height" placeholder="m">
-
-                          <label for="boat-width">Width of Boat (m)</label>
-                          <input class="form-control" id="boat-width" placeholder="m">
-                      </div>
-                      <div class="form-group">
-                          <label for="notes">Notes</label>
-                          <textarea class="form-control" id="notes" rows="5"></textarea>
-                      </div>
-                      <!--
-                      <div class="form-group">
+                            <label for="boat-width">Width of Boat (m)</label>
+                            <input class="form-control" id="boat-width" placeholder="m">
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Notes</label>
+                            <textarea class="form-control" id="notes" ng-model="haul.Notes" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
                           <label for="photo">Add Photos</label>
                           <div class="add-photo">
                               <p>Select to Add Photos</p>
                           </div>
-                      </div>
-                  	  -->
+                        </div>
+                        <div class="controls">
+                            <a href="" id="submit" ng-click="submitHaul(haul, markers, time)"><span class="glyphicon glyphicon-ok"></span> Submit</a>
+                            <a href="" id="reset"><span class="glyphicon glyphicon-repeat"></span> Reset</a>
+                        </div>
                     </form>
                 </div>
             </div>
