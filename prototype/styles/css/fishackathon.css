@@ -30,8 +30,8 @@ body {
 .controls {
   width: 320px;
   position: fixed;
-  bottom: 0;
-  right: 0;
+  bottom: 3px;
+  right: 3px;
   z-index: 2;
 }
 .controls a {
@@ -44,6 +44,7 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   margin-left: 1%;
+  border-radius: 4px;
 }
 .controls a:hover {
   background: #3071a9;
