@@ -174,6 +174,10 @@ warning 6002: The table/view 'Hackathon.dbo.ViewHaulDetail' does not have a prim
           <Parameter Name="date3" Type="datetime2" Mode="In" />
           <Parameter Name="date4" Type="datetime2" Mode="In" />
           <Parameter Name="precision" Type="int" Mode="In" />
+          <Parameter Name="lat1" Type="decimal" Mode="In" />
+          <Parameter Name="lng1" Type="decimal" Mode="In" />
+          <Parameter Name="lat2" Type="decimal" Mode="In" />
+          <Parameter Name="lng2" Type="decimal" Mode="In" />
         </Function>
         <EntityContainer Name="HackathonModelStoreContainer">
           <EntitySet Name="Gear" EntityType="Self.Gear" Schema="dbo" store:Type="Tables" />
@@ -254,16 +258,20 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
             <Parameter Name="date3" Mode="In" Type="DateTime" />
             <Parameter Name="date4" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="CountAndWeightByLongLat" ReturnType="Collection(Isda.Data.CountAndWeightByLongLat_Result)">
+            <Parameter Name="date1" Mode="In" Type="DateTime" />
+            <Parameter Name="date2" Mode="In" Type="DateTime" />
+            <Parameter Name="precision" Mode="In" Type="Int32" />
+            <Parameter Name="lat1" Mode="In" Type="Decimal" />
+            <Parameter Name="lng1" Mode="In" Type="Decimal" />
+            <Parameter Name="lat2" Mode="In" Type="Decimal" />
+            <Parameter Name="lng2" Mode="In" Type="Decimal" />
+          </FunctionImport>
           <FunctionImport Name="DeltaOverTimeByLongLat" ReturnType="Collection(Isda.Data.DeltaOverTimeByLongLat_Result)">
             <Parameter Name="date1" Mode="In" Type="DateTime" />
             <Parameter Name="date2" Mode="In" Type="DateTime" />
             <Parameter Name="date3" Mode="In" Type="DateTime" />
             <Parameter Name="date4" Mode="In" Type="DateTime" />
-            <Parameter Name="precision" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="CountAndWeightByLongLat" ReturnType="Collection(Isda.Data.CountAndWeightByLongLat_Result)">
-            <Parameter Name="date1" Mode="In" Type="DateTime" />
-            <Parameter Name="date2" Mode="In" Type="DateTime" />
             <Parameter Name="precision" Mode="In" Type="Int32" />
             <Parameter Name="lat1" Mode="In" Type="Decimal" />
             <Parameter Name="lng1" Mode="In" Type="Decimal" />
@@ -432,17 +440,17 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
           <Property Type="Decimal" Name="WeightDelta" Nullable="true" Precision="38" Scale="6" />
           <Property Type="Int32" Name="CountDelta" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="DeltaOverTimeByLongLat_Result">
-          <Property Type="Decimal" Name="Latitude" Nullable="true" Precision="9" Scale="6" />
-          <Property Type="Decimal" Name="longitude" Nullable="true" Precision="9" Scale="6" />
-          <Property Type="Decimal" Name="WeightDelta" Nullable="true" Precision="38" Scale="6" />
-          <Property Type="Int32" Name="CountDelta" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="CountAndWeightByLongLat_Result">
           <Property Type="Decimal" Name="Latitude" Nullable="true" Precision="9" Scale="6" />
           <Property Type="Decimal" Name="longitude" Nullable="true" Precision="9" Scale="6" />
           <Property Type="Decimal" Name="AvgHaulWeight" Nullable="true" Precision="38" Scale="6" />
           <Property Type="Int32" Name="TotalCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="DeltaOverTimeByLongLat_Result">
+          <Property Type="Decimal" Name="Latitude" Nullable="true" Precision="9" Scale="6" />
+          <Property Type="Decimal" Name="longitude" Nullable="true" Precision="9" Scale="6" />
+          <Property Type="Decimal" Name="WeightDelta" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Int32" Name="CountDelta" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -544,16 +552,6 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="DeltaOverTimeByLongLat" FunctionName="HackathonModel.Store.DeltaOverTimeByLongLat">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Isda.Data.DeltaOverTimeByLongLat_Result">
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="WeightDelta" ColumnName="WeightDelta" />
-                <ScalarProperty Name="CountDelta" ColumnName="CountDelta" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CountAndWeightByLongLat" FunctionName="HackathonModel.Store.CountAndWeightByLongLat">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Isda.Data.CountAndWeightByLongLat_Result">
@@ -561,6 +559,16 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
                 <ScalarProperty Name="longitude" ColumnName="longitude" />
                 <ScalarProperty Name="AvgHaulWeight" ColumnName="AvgHaulWeight" />
                 <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeltaOverTimeByLongLat" FunctionName="HackathonModel.Store.DeltaOverTimeByLongLat">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Isda.Data.DeltaOverTimeByLongLat_Result">
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="WeightDelta" ColumnName="WeightDelta" />
+                <ScalarProperty Name="CountDelta" ColumnName="CountDelta" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
