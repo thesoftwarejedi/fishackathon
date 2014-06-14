@@ -13,7 +13,7 @@ namespace Isda.Web.Controllers
         public IEnumerable<CountAndWeightByLongLat_Result> Get()
         {
             var e = new HackathonEntities();
-            return e.CountAndWeightByLongLat(DateTime.Now - new TimeSpan(7, 0, 0, 0),
+            return e.CountAndWeightByLongLat(DateTime.Now - new TimeSpan(14, 0, 0, 0),
                                             DateTime.Now,
                                             1);
         }

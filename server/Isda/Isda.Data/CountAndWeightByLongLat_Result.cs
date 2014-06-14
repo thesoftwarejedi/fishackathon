@@ -15,7 +15,7 @@ namespace Isda.Data
     {
         public Nullable<decimal> Latitude { get; set; }
         public Nullable<decimal> longitude { get; set; }
-        public Nullable<decimal> hw { get; set; }
-        public Nullable<int> c { get; set; }
+        public Nullable<decimal> AvgHaulWeight { get; set; }
+        public Nullable<int> TotalCount { get; set; }
     }
 }

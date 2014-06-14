@@ -36,23 +36,6 @@ namespace Isda.Data
         public DbSet<Vessel> Vessels { get; set; }
         public DbSet<ViewHaulDetail> ViewHaulDetails { get; set; }
     
-        public virtual ObjectResult<CountAndWeightByLongLat_Result> CountAndWeightByLongLat(Nullable<System.DateTime> date1, Nullable<System.DateTime> date2, Nullable<int> precision)
-        {
-            var date1Parameter = date1.HasValue ?
-                new ObjectParameter("date1", date1) :
-                new ObjectParameter("date1", typeof(System.DateTime));
-    
-            var date2Parameter = date2.HasValue ?
-                new ObjectParameter("date2", date2) :
-                new ObjectParameter("date2", typeof(System.DateTime));
-    
-            var precisionParameter = precision.HasValue ?
-                new ObjectParameter("precision", precision) :
-                new ObjectParameter("precision", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CountAndWeightByLongLat_Result>("CountAndWeightByLongLat", date1Parameter, date2Parameter, precisionParameter);
-        }
-    
         public virtual ObjectResult<DeltaOverTimeByLanding_Result> DeltaOverTimeByLanding(Nullable<System.DateTime> date1, Nullable<System.DateTime> date2, Nullable<System.DateTime> date3, Nullable<System.DateTime> date4)
         {
             var date1Parameter = date1.HasValue ?
@@ -97,6 +80,23 @@ namespace Isda.Data
                 new ObjectParameter("precision", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DeltaOverTimeByLongLat_Result>("DeltaOverTimeByLongLat", date1Parameter, date2Parameter, date3Parameter, date4Parameter, precisionParameter);
+        }
+    
+        public virtual ObjectResult<CountAndWeightByLongLat_Result> CountAndWeightByLongLat(Nullable<System.DateTime> date1, Nullable<System.DateTime> date2, Nullable<int> precision)
+        {
+            var date1Parameter = date1.HasValue ?
+                new ObjectParameter("date1", date1) :
+                new ObjectParameter("date1", typeof(System.DateTime));
+    
+            var date2Parameter = date2.HasValue ?
+                new ObjectParameter("date2", date2) :
+                new ObjectParameter("date2", typeof(System.DateTime));
+    
+            var precisionParameter = precision.HasValue ?
+                new ObjectParameter("precision", precision) :
+                new ObjectParameter("precision", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CountAndWeightByLongLat_Result>("CountAndWeightByLongLat", date1Parameter, date2Parameter, precisionParameter);
         }
     }
 }

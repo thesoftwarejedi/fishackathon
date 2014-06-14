@@ -244,11 +244,6 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
             <End Role="Haul" EntitySet="Hauls" />
             <End Role="HaulPhoto" EntitySet="HaulPhotoes" />
           </AssociationSet>
-          <FunctionImport Name="CountAndWeightByLongLat" ReturnType="Collection(Isda.Data.CountAndWeightByLongLat_Result)">
-            <Parameter Name="date1" Mode="In" Type="DateTime" />
-            <Parameter Name="date2" Mode="In" Type="DateTime" />
-            <Parameter Name="precision" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="DeltaOverTimeByLanding" ReturnType="Collection(Isda.Data.DeltaOverTimeByLanding_Result)">
             <Parameter Name="date1" Mode="In" Type="DateTime" />
             <Parameter Name="date2" Mode="In" Type="DateTime" />
@@ -260,6 +255,11 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
             <Parameter Name="date2" Mode="In" Type="DateTime" />
             <Parameter Name="date3" Mode="In" Type="DateTime" />
             <Parameter Name="date4" Mode="In" Type="DateTime" />
+            <Parameter Name="precision" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CountAndWeightByLongLat" ReturnType="Collection(Isda.Data.CountAndWeightByLongLat_Result)">
+            <Parameter Name="date1" Mode="In" Type="DateTime" />
+            <Parameter Name="date2" Mode="In" Type="DateTime" />
             <Parameter Name="precision" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -419,12 +419,6 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="CountAndWeightByLongLat_Result">
-          <Property Type="Decimal" Name="Latitude" Nullable="true" Precision="9" Scale="6" />
-          <Property Type="Decimal" Name="longitude" Nullable="true" Precision="9" Scale="6" />
-          <Property Type="Decimal" Name="hw" Nullable="true" Precision="38" Scale="6" />
-          <Property Type="Int32" Name="c" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="DeltaOverTimeByLanding_Result">
           <Property Type="String" Name="landingname" Nullable="false" MaxLength="255" />
           <Property Type="Decimal" Name="WeightDelta" Nullable="true" Precision="38" Scale="6" />
@@ -435,6 +429,12 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
           <Property Type="Decimal" Name="longitude" Nullable="true" Precision="9" Scale="6" />
           <Property Type="Decimal" Name="WeightDelta" Nullable="true" Precision="38" Scale="6" />
           <Property Type="Int32" Name="CountDelta" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CountAndWeightByLongLat_Result">
+          <Property Type="Decimal" Name="Latitude" Nullable="true" Precision="9" Scale="6" />
+          <Property Type="Decimal" Name="longitude" Nullable="true" Precision="9" Scale="6" />
+          <Property Type="Decimal" Name="AvgHaulWeight" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Int32" Name="TotalCount" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -527,16 +527,6 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="CountAndWeightByLongLat" FunctionName="HackathonModel.Store.CountAndWeightByLongLat">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Isda.Data.CountAndWeightByLongLat_Result">
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="hw" ColumnName="hw" />
-                <ScalarProperty Name="c" ColumnName="c" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="DeltaOverTimeByLanding" FunctionName="HackathonModel.Store.DeltaOverTimeByLanding">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Isda.Data.DeltaOverTimeByLanding_Result">
@@ -553,6 +543,16 @@ FROM [dbo].[ViewHaulDetail] AS [ViewHaulDetail]</DefiningQuery>
                 <ScalarProperty Name="longitude" ColumnName="longitude" />
                 <ScalarProperty Name="WeightDelta" ColumnName="WeightDelta" />
                 <ScalarProperty Name="CountDelta" ColumnName="CountDelta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CountAndWeightByLongLat" FunctionName="HackathonModel.Store.CountAndWeightByLongLat">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Isda.Data.CountAndWeightByLongLat_Result">
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="AvgHaulWeight" ColumnName="AvgHaulWeight" />
+                <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
