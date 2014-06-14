@@ -10,7 +10,7 @@
       #map-canvas { height: 100% }
     </style>
 <script type="text/javascript">
-
+    var map;
     //function initialize() {
     //    var mapOptions = {
     //        center: new google.maps.LatLng(12.1252, 122.433523),
@@ -32,6 +32,9 @@
 
     $(function () {
      
+       
+
+
         $.get("http://localhost:32809/api/CountAndWeight", function (data, status) {
            var taxiData = data.map(function(e) {
                 return new google.maps.LatLng(e.Latitude, e.longitude);
@@ -41,7 +44,7 @@
                 zoom: 6,
                 mapTypeId: google.maps.MapTypeId.SATELLITE
             };
-            var map = new google.maps.Map(document.getElementById("map-canvas"),
+            map = new google.maps.Map(document.getElementById("map-canvas"),
                 mapOptions);
 
 
@@ -51,7 +54,8 @@
                 data: pointArray
             });
             heatmap.setMap(map);
-            //heatmap.set('radius', heatmap.get('radius') ? null : 20);
+           
+         
         });
     });
 
@@ -65,7 +69,7 @@
                 zoom: 6,
                 mapTypeId: google.maps.MapTypeId.SATELLITE
             };
-            var map = new google.maps.Map(document.getElementById("map-canvas"),
+            map = new google.maps.Map(document.getElementById("map-canvas"),
                 mapOptions);
 
 
@@ -79,12 +83,6 @@
     }
     
 
-
-    //$(document).ready(function() {
-    //    $.post("http://isda_service.com/IsdaService.svc/GetHauls", function (data) {
-    //        var b = data;
-    //    });
-    //});
 </script>
 
 
