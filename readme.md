@@ -13,7 +13,7 @@ The field Enumerators need to be able to collect more accurate data in a more ex
 ## Solution
 We've built a mobile application designed to help Enumerators enter data quickly and efficiently in the field, aided by 21st century platforms. This data is sent to a centralized platform where it can be used in a number of different ways. We've built one example that uses collected data to display a time-based heat map of recorded catch data. 
 
-![alt tag](https://raw.github.com/thesoftwarejedi/fishackathon/master/fishackathon1.png)
+![alt tag](https://raw.github.com/thesoftwarejedi/fishackathon/master/collector.png)
 
 ## Assumptions
 Enumerators would have access to an Android phone that could run an application and occasionally have access to a mobile network of some kind. If the device has a camera, the collector app could also take advantage of that. We also assume that Enumerators might have limited access to a mobile network so the app loads up and stores all data locally until a network is found.
